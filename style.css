@@ -1,0 +1,30 @@
+#search_open {
+    display:none
+}
+
+#search_outer{
+    position:fixed
+}
+
+#site_search {
+    font-size: 20px;
+    padding: 5px;
+}
+
+#search_outer.right {
+    right:15px
+}
+#search_outer.bottom {
+    bottom:15px
+}
+#search_outer.left {
+    bottom:0px
+}
+
+#search_outer.top {
+    top:15px
+}
+
+#search_trigger {
+    cursor:pointer
+}
