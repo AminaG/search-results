@@ -23,13 +23,14 @@ if ('undefined' == typeof BlockLy) {
             key: 'addSearchToPage',
             value: function addSearchToPage() {
                 this.currentSVG = this.SVG.replace(/color/, this.options.color);
-                this.search_outer = document.createElement('BlockLy-g-search');
-                document.body.appendChild(this.search_outer
-                //search_outer.id='search_outer'
-                );this.search_outer.innerHTML = '<BlockLy-g-search-inner>\n                                        <input onblur="BlockLy.gSearch.blur()" onkeypress="BlockLy.gSearch.keyPress(event)" type=\'search\'>\n                                        <button style=\'display:none\' onclick=\'BlockLy.gSearch.search()\' value=\'search\'>Search</button>\n                                        <BlockLy-g-search-trigger onclick="BlockLy.gSearch.searchTrigger()">\n                                        Trigger\n                                        </BlockLy-g-search-trigger>\n                                    </BlockLy-g-search-inner>';
-                document.getElementById('site_search').setAttribute('placeholder', options.placeholder);
-                search_outer.setAttribute('class', this.options.position);
-                document.getElementById('search_trigger').innerHTML = this.currentSVG;
+                this.searchOuter = document.createElement('blockly-g-search');
+                document.body.appendChild(this.searchOuter
+                //searchOuter.id='searchOuter'
+                );this.searchOuter.innerHTML = '<blockly-g-search-inner>\n                                        <blockly-g-search-visible-on-open>\n                                            <input class="blockly-g-search-input" onblur="BlockLy.gSearch.blur()" onkeypress="BlockLy.gSearch.keyPress(event)" type=\'search\'>\n                                            <button onclick=\'BlockLy.gSearch.search()\' value=\'search\'>Search</button>\n                                        </blockly-g-search-visible-on-open>\n                                        <blockly-g-search-trigger onclick="BlockLy.gSearch.searchTrigger()">\n                                        Trigger\n                                        </blockly-g-search-trigger>\n                                    </blockly-g-search-inner>';
+                this.searchInput = document.getElementsByClassName('blockly-g-search-input')[0];
+                this.searchInput.setAttribute('placeholder', this.options.placeholder);
+                this.searchOuter.setAttribute('class', this.options.position);
+                document.getElementsByTagName('blockly-g-search-trigger')[0].innerHTML = this.currentSVG;
             }
         }, {
             key: 'blur',
@@ -42,7 +43,7 @@ if ('undefined' == typeof BlockLy) {
         }, {
             key: 'closeSearch',
             value: function closeSearch() {
-                this.removeClass(this.search_outer, 'BlockLy-gsearch-opened');
+                this.removeClass(this.searchOuter, 'blockly-gsearch-opened');
                 //document.getElementById('search_open').style.display='none'
                 //document.getElementById('search_trigger').style.display='block'
             }
@@ -74,10 +75,10 @@ if ('undefined' == typeof BlockLy) {
         }, {
             key: 'openSearch',
             value: function openSearch() {
-                this.removeClass(this.search_outer, 'BlockLy-gsearch-opened');
+                this.addClass(this.searchOuter, 'blockly-gsearch-opened');
                 // document.getElementById('search_open').style.display='block'
                 // document.getElementById('search_trigger').style.display='none'
-                document.getElementById('site_search').focus();
+                this.searchInput.focus();
             }
         }, {
             key: 'keyPress',
@@ -95,12 +96,12 @@ if ('undefined' == typeof BlockLy) {
             key: 'getSearchUrl',
             value: function getSearchUrl() {
                 var searchTerm = this.getSearchTerm();
-                return 'https://www.google.com/search?q=' + encodeURIComponent(searchTerm) + ' site:' + get_host();
+                return 'https://www.google.com/search?q=' + encodeURIComponent(searchTerm) + ' site:' + this.getHost();
             }
         }, {
             key: 'getSearchTerm',
             value: function getSearchTerm() {
-                return document.getElementById('site_search').value;
+                return this.searchInput.value;
             }
         }]);
 

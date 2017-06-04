@@ -10,19 +10,22 @@ if('undefined' == typeof BlockLy){
         }
         addSearchToPage(){    
             this.currentSVG = this.SVG.replace(/color/,this.options.color);
-            this.search_outer = document.createElement('BlockLy-g-search');
-            document.body.appendChild(this.search_outer)
-            //search_outer.id='search_outer'
-            this.search_outer.innerHTML = `<BlockLy-g-search-inner>
-                                        <input onblur="BlockLy.gSearch.blur()" onkeypress="BlockLy.gSearch.keyPress(event)" type='search'>
-                                        <button style='display:none' onclick='BlockLy.gSearch.search()' value='search'>Search</button>
-                                        <BlockLy-g-search-trigger onclick="BlockLy.gSearch.searchTrigger()">
+            this.searchOuter = document.createElement('blockly-g-search');
+            document.body.appendChild(this.searchOuter)
+            //searchOuter.id='searchOuter'
+            this.searchOuter.innerHTML = `<blockly-g-search-inner>
+                                        <blockly-g-search-visible-on-open>
+                                            <input class="blockly-g-search-input" onblur="BlockLy.gSearch.blur()" onkeypress="BlockLy.gSearch.keyPress(event)" type='search'>
+                                            <button onclick='BlockLy.gSearch.search()' value='search'>Search</button>
+                                        </blockly-g-search-visible-on-open>
+                                        <blockly-g-search-trigger onclick="BlockLy.gSearch.searchTrigger()">
                                         Trigger
-                                        </BlockLy-g-search-trigger>
-                                    </BlockLy-g-search-inner>`;
-            document.getElementById('site_search').setAttribute('placeholder',options.placeholder)
-            search_outer.setAttribute('class', this.options.position)
-            document.getElementById('search_trigger').innerHTML = this.currentSVG;
+                                        </blockly-g-search-trigger>
+                                    </blockly-g-search-inner>`;
+            this.searchInput = document.getElementsByClassName('blockly-g-search-input')[0];
+            this.searchInput.setAttribute('placeholder',this.options.placeholder)
+            this.searchOuter.setAttribute('class', this.options.position)
+            document.getElementsByTagName('blockly-g-search-trigger')[0].innerHTML = this.currentSVG;
         }
         blur(){
             var _this = this;
@@ -31,7 +34,7 @@ if('undefined' == typeof BlockLy){
             },100)
         }
         closeSearch(){
-            this.removeClass(this.search_outer, 'BlockLy-gsearch-opened');
+            this.removeClass(this.searchOuter, 'blockly-gsearch-opened');
             //document.getElementById('search_open').style.display='none'
             //document.getElementById('search_trigger').style.display='block'
         }
@@ -55,10 +58,10 @@ if('undefined' == typeof BlockLy){
             this.openSearch();
         }
         openSearch(){
-            this.removeClass(this.search_outer, 'BlockLy-gsearch-opened');
+            this.addClass(this.searchOuter, 'blockly-gsearch-opened');
             // document.getElementById('search_open').style.display='block'
             // document.getElementById('search_trigger').style.display='none'
-            document.getElementById('site_search').focus()
+            this.searchInput.focus()
         }
         keyPress(e){
             if(e.keyCode==13) {
@@ -70,10 +73,10 @@ if('undefined' == typeof BlockLy){
         }
         getSearchUrl(){
         var searchTerm = this.getSearchTerm();
-            return 'https://www.google.com/search?q=' + encodeURIComponent(searchTerm) + ' site:' + get_host()
+            return 'https://www.google.com/search?q=' + encodeURIComponent(searchTerm) + ' site:' + this.getHost()
         }
         getSearchTerm(){
-            return document.getElementById('site_search').value
+            return this.searchInput.value
         }    
     };
 /*BlockLyGSearch.options = null;
