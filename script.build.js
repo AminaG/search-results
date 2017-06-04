@@ -26,7 +26,7 @@ if ('undefined' == typeof BlockLy) {
                 this.searchOuter = document.createElement('blockly-g-search');
                 document.body.appendChild(this.searchOuter
                 //searchOuter.id='searchOuter'
-                );this.searchOuter.innerHTML = '<blockly-g-search-inner>\n                                        <blockly-g-search-visible-on-open>\n                                            <input class="blockly-g-search-input" onblur="BlockLy.gSearch.blur()" onkeypress="BlockLy.gSearch.keyPress(event)" type=\'search\'>\n                                            <button onclick=\'BlockLy.gSearch.search()\' value=\'search\'>Search</button>\n                                        </blockly-g-search-visible-on-open>\n                                        <blockly-g-search-trigger onclick="BlockLy.gSearch.searchTrigger()">\n                                        Trigger\n                                        </blockly-g-search-trigger>\n                                    </blockly-g-search-inner>';
+                );this.searchOuter.innerHTML = '<blockly-g-search-inner>\n                                        <blockly-g-search-visible-on-open>\n                                            <input class="blockly-g-search-input" onblur="BlockLy.gSearch.blur()" onkeypress="BlockLy.gSearch.keyPress(event)" type=\'search\'>\n                                            <button onclick=\'BlockLy.gSearch.search()\' value=\'search\' onfocus="BlockLy.gSearch.focusOnSubmit()" onblur="BlockLy.gSearch.blur()">Search</button>\n                                        </blockly-g-search-visible-on-open>\n                                        <blockly-g-search-trigger onclick="BlockLy.gSearch.searchTrigger()">\n                                        Trigger\n                                        </blockly-g-search-trigger>\n                                    </blockly-g-search-inner>';
                 this.searchInput = document.getElementsByClassName('blockly-g-search-input')[0];
                 this.searchInput.setAttribute('placeholder', this.options.placeholder);
                 this.searchOuter.setAttribute('class', this.options.position);
@@ -36,9 +36,14 @@ if ('undefined' == typeof BlockLy) {
             key: 'blur',
             value: function blur() {
                 var _this = this;
-                setTimeout(function () {
+                this.closeTimeout = setTimeout(function () {
                     _this.closeSearch();
                 }, 100);
+            }
+        }, {
+            key: 'focusOnSubmit',
+            value: function focusOnSubmit() {
+                clearTimeout(this.closeTimeout);
             }
         }, {
             key: 'closeSearch',

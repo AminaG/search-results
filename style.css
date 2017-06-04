@@ -31,6 +31,6 @@ blockly-g-search.top {
 blockly-g-search-trigger {
     cursor:pointer
 }
-..blockly-gsearch-opened  blockly-g-search-trigger {
-    cursor:pointer
+.blockly-gsearch-opened blockly-g-search-trigger {
+    display: none;
 }

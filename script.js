@@ -16,7 +16,7 @@ if('undefined' == typeof BlockLy){
             this.searchOuter.innerHTML = `<blockly-g-search-inner>
                                         <blockly-g-search-visible-on-open>
                                             <input class="blockly-g-search-input" onblur="BlockLy.gSearch.blur()" onkeypress="BlockLy.gSearch.keyPress(event)" type='search'>
-                                            <button onclick='BlockLy.gSearch.search()' value='search'>Search</button>
+                                            <button onclick='BlockLy.gSearch.search()' value='search' onfocus="BlockLy.gSearch.focusOnSubmit()" onblur="BlockLy.gSearch.blur()">Search</button>
                                         </blockly-g-search-visible-on-open>
                                         <blockly-g-search-trigger onclick="BlockLy.gSearch.searchTrigger()">
                                         Trigger
@@ -29,9 +29,12 @@ if('undefined' == typeof BlockLy){
         }
         blur(){
             var _this = this;
-            setTimeout(function(){
+            this.closeTimeout = setTimeout(function(){
                 _this.closeSearch()
             },100)
+        }
+        focusOnSubmit(){
+            clearTimeout(this.closeTimeout);
         }
         closeSearch(){
             this.removeClass(this.searchOuter, 'blockly-gsearch-opened');
