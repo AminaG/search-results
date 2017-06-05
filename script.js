@@ -11,7 +11,7 @@ if('undefined' == typeof INSTALL_SCOPE.BlockLy){
         
         reload(options){
             this.options = options;
-            this.currentSVG = this.SVG.replace(/color/,this.options.color); 
+            this.currentSVG = this.SVG.replace(/color/,this.options.icon_color); 
             this.reRender();
         }
         reRender(){
@@ -25,7 +25,7 @@ if('undefined' == typeof INSTALL_SCOPE.BlockLy){
                                         Trigger
                                         </blockly-g-search-trigger>
                                     </blockly-g-search-inner>`;
-                       
+            this.addClass(this.searchOuter,'theme-' + this.options.theme);    
             INSTALL_SCOPE.BlockLy.gSearch.elm = INSTALL.createElement(this.options.location, INSTALL_SCOPE.BlockLy.gSearch.elm);
             this.renderInElm();
             if(this.options["location type"] == 'floated'){

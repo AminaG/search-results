@@ -139,8 +139,22 @@
                     "type": "string",
                     "default": "Search"
                 },
-            "color": {
-                    "title": "color of symbol",
+            "theme" : {
+                    "title": "Choose theme",
+                    "order": 7,
+                    "type": "string",
+                    "default": "light",
+                    "enum": [
+                        "light",
+                        "dark"
+                    ],
+                    "enumNames": {
+                        "light": "Light",
+                        "dark": "Dark"
+                    }
+                },
+                "icon_color": {
+                    "title": "color of icon",
                     "order": 7,
                     "type": "string",
                     "default": "blue",

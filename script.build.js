@@ -23,7 +23,7 @@ if ('undefined' == typeof INSTALL_SCOPE.BlockLy) {
             key: 'reload',
             value: function reload(options) {
                 this.options = options;
-                this.currentSVG = this.SVG.replace(/color/, this.options.color);
+                this.currentSVG = this.SVG.replace(/color/, this.options.icon_color);
                 this.reRender();
             }
         }, {
@@ -31,7 +31,7 @@ if ('undefined' == typeof INSTALL_SCOPE.BlockLy) {
             value: function reRender() {
                 this.searchOuter = document.createElement('blockly-g-search');
                 this.searchOuter.innerHTML = '<blockly-g-search-inner>\n                                        <blockly-g-search-visible-on-open>\n                                            <input class="blockly-g-search-input" onblur="INSTALL_SCOPE.BlockLy.gSearch.blur()" onkeypress="INSTALL_SCOPE.BlockLy.gSearch.keyPress(event)" type=\'search\'>\n                                            <button class="blockly-g-search-submit" onclick="INSTALL_SCOPE.BlockLy.gSearch.search()" value=\'search\' onfocus="INSTALL_SCOPE.BlockLy.gSearch.focusOnSubmit()" onblur="INSTALL_SCOPE.BlockLy.gSearch.blur()">Search</button>\n                                        </blockly-g-search-visible-on-open>\n                                        <blockly-g-search-trigger onclick="INSTALL_SCOPE.BlockLy.gSearch.searchTrigger()">\n                                        Trigger\n                                        </blockly-g-search-trigger>\n                                    </blockly-g-search-inner>';
-
+                this.addClass(this.searchOuter, 'theme-' + this.options.theme);
                 INSTALL_SCOPE.BlockLy.gSearch.elm = INSTALL.createElement(this.options.location, INSTALL_SCOPE.BlockLy.gSearch.elm);
                 this.renderInElm();
                 if (this.options["location type"] == 'floated') {
