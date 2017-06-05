@@ -26,10 +26,6 @@ blockly-g-search-visible-on-open {
 	display: block;
 }
 
-blockly-g-search{
-    position:fixed
-}
-
 blockly-g-search-input {
     font-size: 20px;
     padding: 5px;
