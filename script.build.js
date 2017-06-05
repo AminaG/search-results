@@ -35,12 +35,13 @@ if ('undefined' == typeof INSTALL_SCOPE.BlockLy) {
         }, {
             key: 'reRender',
             value: function reRender() {
+                this.searchOuter = document.createElement('blockly-g-search');
+                this.searchOuter.innerHTML = '<blockly-g-search-inner>\n                                        <blockly-g-search-visible-on-open>\n                                            <input class="blockly-g-search-input" onblur="BlockLy.gSearch.blur()" onkeypress="BlockLy.gSearch.keyPress(event)" type=\'search\'>\n                                            <button class="blockly-g-search-submit" onclick=\'BlockLy.gSearch.search()\' value=\'search\' onfocus="BlockLy.gSearch.focusOnSubmit()" onblur="BlockLy.gSearch.blur()">Search</button>\n                                        </blockly-g-search-visible-on-open>\n                                        <blockly-g-search-trigger onclick="BlockLy.gSearch.searchTrigger()">\n                                        Trigger\n                                        </blockly-g-search-trigger>\n                                    </blockly-g-search-inner>';
+
                 if (this.options["location type"] == 'element') {
-                    this.removeClass(this.searchOuter, 'blockly-g-floated');
                     INSTALL_SCOPE.BlockLy.gSearch.elm = INSTALL.createElement(this.options.location, INSTALL_SCOPE.BlockLy.gSearch.elm);
                     this.renderInElm();
                 } else {
-
                     this.renderFloated();
                     this.addClass(this.searchOuter, 'blockly-g-floated');
                 }
@@ -51,17 +52,14 @@ if ('undefined' == typeof INSTALL_SCOPE.BlockLy) {
         }, {
             key: 'renderInElm',
             value: function renderInElm() {
-                this.searchOuter = document.createElement('blockly-g-search');
-
+                INSTALL_SCOPE.BlockLy.gSearch.elm.appendChild(this.searchOuter);
                 //searchOuter.id='searchOuter'
-                this.searchOuter.innerHTML = '<blockly-g-search-inner>\n                                        <blockly-g-search-visible-on-open>\n                                            <input class="blockly-g-search-input" onblur="BlockLy.gSearch.blur()" onkeypress="BlockLy.gSearch.keyPress(event)" type=\'search\'>\n                                            <button class="blockly-g-search-submit" onclick=\'BlockLy.gSearch.search()\' value=\'search\' onfocus="BlockLy.gSearch.focusOnSubmit()" onblur="BlockLy.gSearch.blur()">Search</button>\n                                        </blockly-g-search-visible-on-open>\n                                        <blockly-g-search-trigger onclick="BlockLy.gSearch.searchTrigger()">\n                                        Trigger\n                                        </blockly-g-search-trigger>\n                                    </blockly-g-search-inner>';
                 this.searchInput = document.getElementsByClassName('blockly-g-search-input')[0];
                 this.searchSubmit = document.getElementsByClassName('blockly-g-search-submit')[0];
             }
         }, {
             key: 'renderFloated',
             value: function renderFloated() {
-                this.searchOuter = document.createElement('blockly-g-search');
                 document.body.appendChild(this.searchOuter);
             }
         }, {

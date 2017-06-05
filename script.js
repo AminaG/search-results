@@ -18,24 +18,7 @@ if('undefined' == typeof INSTALL_SCOPE.BlockLy){
             this.reRender();
         }
         reRender(){
-            if(this.options["location type"] == 'element'){
-                this.removeClass(this.searchOuter, 'blockly-g-floated');
-                INSTALL_SCOPE.BlockLy.gSearch.elm = INSTALL.createElement(this.options.location, INSTALL_SCOPE.BlockLy.gSearch.elm);
-                this.renderInElm();
-            }
-            else{
-
-                this.renderFloated();
-                this.addClass(this.searchOuter, 'blockly-g-floated');
-            }
-
-            this.searchInput.setAttribute('placeholder',this.options.placeholder);
-            this.searchSubmit.value  = this.options.submit_text;
-        }
-        renderInElm(){
             this.searchOuter = document.createElement('blockly-g-search');
-            
-            //searchOuter.id='searchOuter'
             this.searchOuter.innerHTML = `<blockly-g-search-inner>
                                         <blockly-g-search-visible-on-open>
                                             <input class="blockly-g-search-input" onblur="BlockLy.gSearch.blur()" onkeypress="BlockLy.gSearch.keyPress(event)" type='search'>
@@ -45,11 +28,26 @@ if('undefined' == typeof INSTALL_SCOPE.BlockLy){
                                         Trigger
                                         </blockly-g-search-trigger>
                                     </blockly-g-search-inner>`;
+            
+            if(this.options["location type"] == 'element'){
+                INSTALL_SCOPE.BlockLy.gSearch.elm = INSTALL.createElement(this.options.location, INSTALL_SCOPE.BlockLy.gSearch.elm);
+                this.renderInElm();
+            }
+            else{
+                this.renderFloated();
+                this.addClass(this.searchOuter, 'blockly-g-floated');
+            }
+
+            this.searchInput.setAttribute('placeholder',this.options.placeholder);
+            this.searchSubmit.value  = this.options.submit_text;
+        }
+        renderInElm(){
+            INSTALL_SCOPE.BlockLy.gSearch.elm.appendChild(this.searchOuter);
+            //searchOuter.id='searchOuter'
             this.searchInput = document.getElementsByClassName('blockly-g-search-input')[0];
             this.searchSubmit = document.getElementsByClassName('blockly-g-search-submit')[0];
         }
         renderFloated(){
-            this.searchOuter = document.createElement('blockly-g-search');
             document.body.appendChild(this.searchOuter);
         }
         blur(){
