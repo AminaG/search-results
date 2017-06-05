@@ -1,4 +1,6 @@
-
+if(!window.INSTALL_SCOPE){
+    window.INSTALL_SCOPE = {};
+}
 if('undefined' == typeof INSTALL_SCOPE.BlockLy){
     INSTALL_SCOPE.BlockLy = {};
 }
@@ -26,11 +28,10 @@ if('undefined' == typeof INSTALL_SCOPE.BlockLy){
                                         </blockly-g-search-trigger>
                                     </blockly-g-search-inner>`;
             this.addClass(this.searchOuter,'theme-' + this.options.theme);    
-            INSTALL_SCOPE.BlockLy.gSearch.elm = INSTALL.createElement(this.options.location, INSTALL_SCOPE.BlockLy.gSearch.elm);
+            INSTALL_SCOPE.BlockLy.gSearch.elm = window.INSTALL ? INSTALL.createElement(this.options.location, INSTALL_SCOPE.BlockLy.gSearch.elm) : document.body;
             this.renderInElm();
             if(this.options["location type"] == 'floated'){
                 this.renderFloated();
-                this.addClass(this.searchOuter, 'blockly-g-floated');
             }        
             
             this.searchInput = document.getElementsByClassName('blockly-g-search-input')[0];
@@ -46,6 +47,7 @@ if('undefined' == typeof INSTALL_SCOPE.BlockLy){
             
         }
         renderFloated(){
+            this.addClass(this.searchOuter, 'blockly-g-floated');
             var cssObj = {};
             cssObj[this.options.postion_horizontal.type] = this.options.postion_horizontal.distance;
             cssObj[this.options.postion_vertical.type] = this.options.postion_vertical.distance;
@@ -132,8 +134,17 @@ else {
     INSTALL_SCOPE.BlockLy.gSearch.location = window.location;
     INSTALL_SCOPE.BlockLy.gSearch.reload({
         color:'blue',
-        position:'top left',
+        'location type':'floated',
+        'postion_horizontal' :{
+            'type':'left',
+            distance:'10px'
+        },
+        'postion_vertical' :{
+            'type':'top',
+            distance:'10px'
+        },
         submit_text:'now',
+        theme:'light',
         placeholder:'Enter search term ...'
     });
 }
