@@ -14,22 +14,16 @@ blockly-g-search-input {
     padding: 5px;
 }
 
-blockly-g-search.right {
-    right:15px
-}
-blockly-g-search.bottom {
-    bottom:15px
-}
-blockly-g-search.left {
-    bottom:0px
-}
-
-blockly-g-search.top {
-    top:15px
+blockly-g-search.blockly-g-floated{
+    position: fixed;
+    z-index: 99;
 }
 
 blockly-g-search-trigger {
     cursor:pointer
+}
+blockly-g-search-trigger svg{
+    width:50px;
 }
 .blockly-gsearch-opened blockly-g-search-trigger {
     display: none;

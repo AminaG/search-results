@@ -40,6 +40,9 @@
                 "title": "Location",
                 "type": "object",
                 "format": "element",
+                "showIf": {
+                    "location type": "element"
+                  },
                 "default": {
                   "selector": "body",
                   "method": "prepend"
@@ -49,8 +52,11 @@
             "postion_vertical" : {
               "type": "object",
               "order": 3,
+              "showIf": {
+                "location type": "floated"
+              },
               "properties": {
-                "postion_vertical_type" : {
+                "type" : {
                     "title": "Vertical position",
                     "order": 1,
                     "type": "string",
@@ -64,7 +70,7 @@
                         "bottom": "Bottom"
                     }
                 },
-                "postion_vertical_distance" : {
+                "distance" : {
                     "title": "Vertical distance",
                     "order": 2,
                     "type": "string",
@@ -85,8 +91,11 @@
             "postion_horizontal" : {
               "type": "object",
               "order": 4,
+              "showIf": {
+                "location type": "floated"
+              },
               "properties": {
-                "postion_horizontal_type" : {
+                "type" : {
                     "title": "Horizontal position",
                     "order": 1,
                     "type": "string",
@@ -100,7 +109,7 @@
                         "right": "Right"
                     }
                 },
-                "postion_horizontal_distance" : {
+                "distance" : {
                     "title": "Horizontal distance",
                     "order": 2,
                     "type": "string",
@@ -129,6 +138,13 @@
                     "order": 6,
                     "type": "string",
                     "default": "Search"
+                },
+            "color": {
+                    "title": "color of symbol",
+                    "order": 7,
+                    "type": "string",
+                    "default": "blue",
+                    "format": "color"
                 }
         }
     }
