@@ -6,7 +6,7 @@ if('undefined' == typeof INSTALL_SCOPE.BlockLy){
 (function(){
     class gSearch{
         getHost(){
-            return BlockLy.gSearch.location.host;
+            return INSTALL_SCOPE.BlockLy.gSearch.location.host;
         }
         
         reload(options){
@@ -19,29 +19,29 @@ if('undefined' == typeof INSTALL_SCOPE.BlockLy){
             this.searchOuter.innerHTML = `<blockly-g-search-inner>
                                         <blockly-g-search-visible-on-open>
                                             <input class="blockly-g-search-input" onblur="INSTALL_SCOPE.BlockLy.gSearch.blur()" onkeypress="INSTALL_SCOPE.BlockLy.gSearch.keyPress(event)" type='search'>
-                                            <button class="blockly-g-search-submit" onclick='BlockLy.gSearch.search()' value='search' onfocus="INSTALL_SCOPE.BlockLy.gSearch.focusOnSubmit()" onblur="INSTALL_SCOPE.BlockLy.gSearch.blur()">Search</button>
+                                            <button class="blockly-g-search-submit" onclick="INSTALL_SCOPE.BlockLy.gSearch.search()" value='search' onfocus="INSTALL_SCOPE.BlockLy.gSearch.focusOnSubmit()" onblur="INSTALL_SCOPE.BlockLy.gSearch.blur()">Search</button>
                                         </blockly-g-search-visible-on-open>
                                         <blockly-g-search-trigger onclick="INSTALL_SCOPE.BlockLy.gSearch.searchTrigger()">
                                         Trigger
                                         </blockly-g-search-trigger>
                                     </blockly-g-search-inner>`;
-            
-            if(this.options["location type"] == 'element'){
-                INSTALL_SCOPE.BlockLy.gSearch.elm = INSTALL.createElement(this.options.location, INSTALL_SCOPE.BlockLy.gSearch.elm);
-                this.renderInElm();
-            }
-            else{
+                       
+            INSTALL_SCOPE.BlockLy.gSearch.elm = INSTALL.createElement(this.options.location, INSTALL_SCOPE.BlockLy.gSearch.elm);
+            this.renderInElm();
+            if(this.options["location type"] == 'floated'){
                 this.renderFloated();
                 this.addClass(this.searchOuter, 'blockly-g-floated');
-            }
+            }        
+            
             this.searchInput = document.getElementsByClassName('blockly-g-search-input')[0];
             this.searchSubmit = document.getElementsByClassName('blockly-g-search-submit')[0];
             document.getElementsByTagName('blockly-g-search-trigger')[0].innerHTML = this.currentSVG;
             this.searchInput.setAttribute('placeholder',this.options.placeholder);
-            this.searchSubmit.value  = this.options.submit_text;
+            this.searchSubmit.textContent  = this.options.submit_text;
         }
         renderInElm(){
-            INSTALL_SCOPE.BlockLy.gSearch.elm.appendChild(this.searchOuter);
+            var elm = INSTALL_SCOPE.BlockLy.gSearch.elm ? INSTALL_SCOPE.BlockLy.gSearch.elm : document.body;
+            elm.appendChild(this.searchOuter);
             //searchOuter.id='searchOuter'
             
         }
@@ -50,10 +50,10 @@ if('undefined' == typeof INSTALL_SCOPE.BlockLy){
             cssObj[this.options.postion_horizontal.type] = this.options.postion_horizontal.distance;
             cssObj[this.options.postion_vertical.type] = this.options.postion_vertical.distance;
             
-            console.log(this.options);
-            console.log(cssObj);
+            //console.log(this.options);
+            //console.log(cssObj);
             this.addCss(this.searchOuter, cssObj);
-            document.body.appendChild(this.searchOuter);
+            //document.body.appendChild(this.searchOuter);
         }
         blur(){
             var _this = this;
@@ -109,11 +109,11 @@ if('undefined' == typeof INSTALL_SCOPE.BlockLy){
             window.open(this.getSearchUrl(),'_blank')
         }
         getSearchUrl(){
-        var searchTerm = this.getSearchTerm();
+            var searchTerm = this.getSearchTerm();
             return 'https://www.google.com/search?q=' + encodeURIComponent(searchTerm) + ' site:' + this.getHost()
         }
         getSearchTerm(){
-            return this.searchInput.value
+            return this.searchInput.value;
         }    
     };
 /*BlockLyGSearch.options = null;
@@ -125,6 +125,7 @@ INSTALL_SCOPE.BlockLy.gSearch.elm = null;
 
 if(window.INSTALL_OPTIONS) {
     INSTALL_SCOPE.BlockLy.gSearch.location = INSTALL.proxy.originalURL.parsed;
+    console.log(INSTALL_SCOPE.BlockLy.gSearch.location);
     INSTALL_SCOPE.BlockLy.gSearch.reload(INSTALL_OPTIONS);
 }
 else {

@@ -17,50 +17,52 @@ if ('undefined' == typeof INSTALL_SCOPE.BlockLy) {
         _createClass(gSearch, [{
             key: 'getHost',
             value: function getHost() {
-                return BlockLy.gSearch.location.host;
-            }
-        }, {
-            key: 'addSearchToPage',
-            value: function addSearchToPage() {
-                this.currentSVG = this.SVG.replace(/color/, this.options.color);
-
-                document.getElementsByTagName('blockly-g-search-trigger')[0].innerHTML = this.currentSVG;
+                return INSTALL_SCOPE.BlockLy.gSearch.location.host;
             }
         }, {
             key: 'reload',
             value: function reload(options) {
                 this.options = options;
+                this.currentSVG = this.SVG.replace(/color/, this.options.color);
                 this.reRender();
             }
         }, {
             key: 'reRender',
             value: function reRender() {
                 this.searchOuter = document.createElement('blockly-g-search');
-                this.searchOuter.innerHTML = '<blockly-g-search-inner>\n                                        <blockly-g-search-visible-on-open>\n                                            <input class="blockly-g-search-input" onblur="BlockLy.gSearch.blur()" onkeypress="BlockLy.gSearch.keyPress(event)" type=\'search\'>\n                                            <button class="blockly-g-search-submit" onclick=\'BlockLy.gSearch.search()\' value=\'search\' onfocus="BlockLy.gSearch.focusOnSubmit()" onblur="BlockLy.gSearch.blur()">Search</button>\n                                        </blockly-g-search-visible-on-open>\n                                        <blockly-g-search-trigger onclick="BlockLy.gSearch.searchTrigger()">\n                                        Trigger\n                                        </blockly-g-search-trigger>\n                                    </blockly-g-search-inner>';
+                this.searchOuter.innerHTML = '<blockly-g-search-inner>\n                                        <blockly-g-search-visible-on-open>\n                                            <input class="blockly-g-search-input" onblur="INSTALL_SCOPE.BlockLy.gSearch.blur()" onkeypress="INSTALL_SCOPE.BlockLy.gSearch.keyPress(event)" type=\'search\'>\n                                            <button class="blockly-g-search-submit" onclick="INSTALL_SCOPE.BlockLy.gSearch.search()" value=\'search\' onfocus="INSTALL_SCOPE.BlockLy.gSearch.focusOnSubmit()" onblur="INSTALL_SCOPE.BlockLy.gSearch.blur()">Search</button>\n                                        </blockly-g-search-visible-on-open>\n                                        <blockly-g-search-trigger onclick="INSTALL_SCOPE.BlockLy.gSearch.searchTrigger()">\n                                        Trigger\n                                        </blockly-g-search-trigger>\n                                    </blockly-g-search-inner>';
 
-                if (this.options["location type"] == 'element') {
-                    INSTALL_SCOPE.BlockLy.gSearch.elm = INSTALL.createElement(this.options.location, INSTALL_SCOPE.BlockLy.gSearch.elm);
-                    this.renderInElm();
-                } else {
+                INSTALL_SCOPE.BlockLy.gSearch.elm = INSTALL.createElement(this.options.location, INSTALL_SCOPE.BlockLy.gSearch.elm);
+                this.renderInElm();
+                if (this.options["location type"] == 'floated') {
                     this.renderFloated();
                     this.addClass(this.searchOuter, 'blockly-g-floated');
                 }
 
+                this.searchInput = document.getElementsByClassName('blockly-g-search-input')[0];
+                this.searchSubmit = document.getElementsByClassName('blockly-g-search-submit')[0];
+                document.getElementsByTagName('blockly-g-search-trigger')[0].innerHTML = this.currentSVG;
                 this.searchInput.setAttribute('placeholder', this.options.placeholder);
-                this.searchSubmit.value = this.options.submit_text;
+                this.searchSubmit.textContent = this.options.submit_text;
             }
         }, {
             key: 'renderInElm',
             value: function renderInElm() {
-                INSTALL_SCOPE.BlockLy.gSearch.elm.appendChild(this.searchOuter);
+                var elm = INSTALL_SCOPE.BlockLy.gSearch.elm ? INSTALL_SCOPE.BlockLy.gSearch.elm : document.body;
+                elm.appendChild(this.searchOuter);
                 //searchOuter.id='searchOuter'
-                this.searchInput = document.getElementsByClassName('blockly-g-search-input')[0];
-                this.searchSubmit = document.getElementsByClassName('blockly-g-search-submit')[0];
             }
         }, {
             key: 'renderFloated',
             value: function renderFloated() {
-                document.body.appendChild(this.searchOuter);
+                var cssObj = {};
+                cssObj[this.options.postion_horizontal.type] = this.options.postion_horizontal.distance;
+                cssObj[this.options.postion_vertical.type] = this.options.postion_vertical.distance;
+
+                //console.log(this.options);
+                //console.log(cssObj);
+                this.addCss(this.searchOuter, cssObj);
+                //document.body.appendChild(this.searchOuter);
             }
         }, {
             key: 'blur',
@@ -101,6 +103,14 @@ if ('undefined' == typeof INSTALL_SCOPE.BlockLy) {
                     classList.splice(classList.indexOf(className), 1);
                 }
                 elm.className = classList.join(' ');
+            }
+        }, {
+            key: 'addCss',
+            value: function addCss(domElm, cssObj) {
+                for (var i in cssObj) {
+                    domElm.style[i] = cssObj[i];
+                }
+                console.log(domElm, domElm.style);
             }
         }, {
             key: 'searchTrigger',
@@ -152,16 +162,18 @@ if ('undefined' == typeof INSTALL_SCOPE.BlockLy) {
     INSTALL_SCOPE.BlockLy.gSearch.elm = null;
 
     if (window.INSTALL_OPTIONS) {
-        INSTALL_SCOPE.BlockLy.gSearch.options = INSTALL_OPTIONS;
         INSTALL_SCOPE.BlockLy.gSearch.location = INSTALL.proxy.originalURL.parsed;
+        console.log(INSTALL_SCOPE.BlockLy.gSearch.location);
+        INSTALL_SCOPE.BlockLy.gSearch.reload(INSTALL_OPTIONS);
     } else {
-        INSTALL_SCOPE.BlockLy.gSearch.options = {
+        INSTALL_SCOPE.BlockLy.gSearch.location = window.location;
+        INSTALL_SCOPE.BlockLy.gSearch.reload({
             color: 'blue',
             position: 'top left',
+            submit_text: 'now',
             placeholder: 'Enter search term ...'
-        };
-        INSTALL_SCOPE.BlockLy.gSearch.location = window.location;
+        });
     }
-    INSTALL_SCOPE.BlockLy.gSearch.addSearchToPage();
+    //INSTALL_SCOPE.BlockLy.gSearch.addSearchToPage();
     //console.log('ssss');
 })();
