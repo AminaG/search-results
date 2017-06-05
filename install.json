@@ -11,50 +11,125 @@
             }
         ]
     },
+    "preview": {
+      "handlers": [
+        {
+          "options": ["*"],
+          "execute": "INSTALL_SCOPE.BlockLy.gSearch.reload(INSTALL_OPTIONS)"
+        }
+      ]
+    },
     "options": {
         "properties": {
+            "location type" : {
+              "default": "element",
+              "format": "radios",
+              "title": "How to position form",
+              "type": "string",
+              "order": 1,
+              "enum": [
+                "element",
+                "floated"
+              ],
+              "enumNames": {
+                "element": "In element",
+                "floated": "Fixed in screen"
+              }
+            },
+            "location": {
+                "title": "Location",
+                "type": "object",
+                "format": "element",
+                "default": {
+                  "selector": "body",
+                  "method": "prepend"
+                },
+                "order": 2
+            },
+            "postion_vertical" : {
+              "type": "object",
+              "order": 3,
+              "properties": {
+                "postion_vertical_type" : {
+                    "title": "Vertical position",
+                    "order": 1,
+                    "type": "string",
+                    "default": "top",
+                    "enum": [
+                        "top",
+                        "bottom"
+                    ],
+                    "enumNames": {
+                        "top": "Top",
+                        "bottom": "Bottom"
+                    }
+                },
+                "postion_vertical_distance" : {
+                    "title": "Vertical distance",
+                    "order": 2,
+                    "type": "string",
+                    "default": "10px",
+                    "enum": [
+                        "5px",
+                        "10px",
+                        "15px"
+                    ],
+                    "enumNames": {
+                        "5px": "Small",
+                        "10px": "Medium",
+                        "15px": "Large"
+                    }
+                }
+              }
+            },
+            "postion_horizontal" : {
+              "type": "object",
+              "order": 4,
+              "properties": {
+                "postion_horizontal_type" : {
+                    "title": "Horizontal position",
+                    "order": 1,
+                    "type": "string",
+                    "default": "left",
+                    "enum": [
+                        "left",
+                        "right"
+                    ],
+                    "enumNames": {
+                        "left": "Left",
+                        "right": "Right"
+                    }
+                },
+                "postion_horizontal_distance" : {
+                    "title": "Horizontal distance",
+                    "order": 2,
+                    "type": "string",
+                    "default": "10px",
+                    "enum": [
+                        "5px",
+                        "10px",
+                        "15px"
+                    ],
+                    "enumNames": {
+                        "5px": "Small",
+                        "10px": "Medium",
+                        "15px": "Large"
+                    }
+                }
+              }
+            },
             "placeholder": {
-                "title": "Input button text",
-                "order": 1,
-                "type": "string",
-                "default": "Enter search term ..."
-            },
-            "position": {
-                "title": "Search position",
-                "order": 2,
-                "type": "string",
-                "default": "top left",
-                "format": "radios",
-                "enum": [
-                    "top left",
-                    "top right",
-                    "bottom left",
-                    "bottom right"
-                ],
-                "enumNames": {
-                    "top left": "Top left",
-                    "top right": "Top right",
-                    "bottom left": "Bottom left",
-                    "bottom right": "Bottom right"
+                    "title": "Input button text",
+                    "order": 5,
+                    "type": "string",
+                    "default": "Enter search term ..."
+                },
+            "submit_text": {
+                    "title": "Input button text",
+                    "order": 6,
+                    "type": "string",
+                    "default": "Search"
                 }
-            },
-            "color": {
-                "title": "Color",
-                "order": 3,
-                "type": "string",
-                "default": "blue",
-                "format": "radios",
-                "enum": [
-                    "blue",
-                    "red",
-                    "green"
-                ],
-                "enumNames": {
-                    "blue": "Blue",
-                    "red": "Red",
-                    "green": "Green"
-                }
-            }
         }
     }
 }
