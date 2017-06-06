@@ -1,13 +1,13 @@
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 if (!window.INSTALL_SCOPE) {
-    window.INSTALL_SCOPE = {};
+    window.INSTALL_SCOPE = {
+        devel: true
+    };
 }
 if ('undefined' == typeof INSTALL_SCOPE.BlockLy) {
     INSTALL_SCOPE.BlockLy = {};
@@ -36,8 +36,8 @@ if ('undefined' == typeof INSTALL_SCOPE.BlockLy) {
                 this.searchOuter = document.createElement('blockly-g-search');
                 this.searchOuter.innerHTML = '<blockly-g-search-inner>\n                                        <blockly-g-search-visible-on-open>\n                                            <input class="blockly-g-search-input" type=\'search\'>\n                                            <button type="button" class="blockly-g-search-submit" >Search</button>\n                                        </blockly-g-search-visible-on-open>\n                                        <blockly-g-search-trigger >\n                                        Trigger\n                                        </blockly-g-search-trigger>\n                                    </blockly-g-search-inner>';
                 this.addClass(this.searchOuter, 'theme-' + this.options.theme);
-                this.elm = 'undefined' != typeof INSTALL.createElement ? INSTALL.createElement(this.options.location, this.elm) : document.body;
-                console.log(_typeof(INSTALL.createElement));
+                this.elm = !INSTALL_SCOPE.devel ? INSTALL.createElement(this.options.location, this.elm) : document.body;
+                //console.log(typeof INSTALL.createElement);
                 this.renderInElm();
                 if (this.options["location type"] == 'floated') {
                     this.renderFloated();
@@ -145,7 +145,7 @@ if ('undefined' == typeof INSTALL_SCOPE.BlockLy) {
                 for (var i in cssObj) {
                     domElm.style[i] = cssObj[i];
                 }
-                console.log(domElm, domElm.style);
+                //console.log(domElm, domElm.style);
             }
         }, {
             key: 'searchTrigger',

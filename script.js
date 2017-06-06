@@ -1,5 +1,7 @@
 if(!window.INSTALL_SCOPE){
-    window.INSTALL_SCOPE = {};
+    window.INSTALL_SCOPE = {
+        devel : true
+    };
 }
 if('undefined' == typeof INSTALL_SCOPE.BlockLy){
     INSTALL_SCOPE.BlockLy = {};
@@ -27,8 +29,8 @@ if('undefined' == typeof INSTALL_SCOPE.BlockLy){
                                         </blockly-g-search-trigger>
                                     </blockly-g-search-inner>`;
             this.addClass(this.searchOuter,'theme-' + this.options.theme);    
-            this.elm = ('undefined' != typeof INSTALL.createElement) ? INSTALL.createElement(this.options.location, this.elm) : document.body;
-            console.log(typeof INSTALL.createElement);
+            this.elm = !INSTALL_SCOPE.devel ? INSTALL.createElement(this.options.location, this.elm) : document.body;
+            //console.log(typeof INSTALL.createElement);
             this.renderInElm();
             if(this.options["location type"] == 'floated'){
                 this.renderFloated();
@@ -119,7 +121,7 @@ if('undefined' == typeof INSTALL_SCOPE.BlockLy){
             for(var i in cssObj){
                 domElm.style[i] = cssObj[i];
             }
-            console.log(domElm, domElm.style);
+            //console.log(domElm, domElm.style);
         }
         searchTrigger(){
             this.openSearch();
