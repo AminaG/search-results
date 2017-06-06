@@ -9,7 +9,15 @@
     padding: 5px;
 
 }
-
+blockly-g-search{
+    width: 100%;
+    max-width: 350px;
+}
+blockly-g-search,
+blockly-g-search-inner,
+blockly-g-search-visible-on-open{
+    display: block;
+}
 .blockly-gsearch-opened blockly-g-search-visible-on-open input{
     border: 1px solid #e8e8e8;
     font-size: 15px;
@@ -24,10 +32,12 @@ blockly-g-search-visible-on-open {
 }
 .blockly-gsearch-opened blockly-g-search-visible-on-open{
 	display: block;
+
 }
 
 blockly-g-search-input {
     font-size: 20px;
+    font-size: 5.9vw;
     padding: 5px;
 }
 

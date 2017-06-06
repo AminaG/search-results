@@ -4,7 +4,8 @@ if(!window.INSTALL_SCOPE){
 if('undefined' == typeof INSTALL_SCOPE.BlockLy){
     INSTALL_SCOPE.BlockLy = {};
 }
-
+console.log('sssss');
+console.log(window.INSTALL);
 (function(){
     class gSearch{
         getHost(){
@@ -20,15 +21,16 @@ if('undefined' == typeof INSTALL_SCOPE.BlockLy){
             this.searchOuter = document.createElement('blockly-g-search');
             this.searchOuter.innerHTML = `<blockly-g-search-inner>
                                         <blockly-g-search-visible-on-open>
-                                            <input class="blockly-g-search-input" onblur="INSTALL_SCOPE.BlockLy.gSearch.blur()" onkeypress="INSTALL_SCOPE.BlockLy.gSearch.keyPress(event)" type='search'>
-                                            <button class="blockly-g-search-submit" onclick="INSTALL_SCOPE.BlockLy.gSearch.search()" value='search' onfocus="INSTALL_SCOPE.BlockLy.gSearch.focusOnSubmit()" onblur="INSTALL_SCOPE.BlockLy.gSearch.blur()">Search</button>
+                                            <input class="blockly-g-search-input" type='search'>
+                                            <button type="button" class="blockly-g-search-submit" >Search</button>
                                         </blockly-g-search-visible-on-open>
-                                        <blockly-g-search-trigger onclick="INSTALL_SCOPE.BlockLy.gSearch.searchTrigger()">
+                                        <blockly-g-search-trigger >
                                         Trigger
                                         </blockly-g-search-trigger>
                                     </blockly-g-search-inner>`;
             this.addClass(this.searchOuter,'theme-' + this.options.theme);    
-            INSTALL_SCOPE.BlockLy.gSearch.elm = window.INSTALL ? INSTALL.createElement(this.options.location, INSTALL_SCOPE.BlockLy.gSearch.elm) : document.body;
+            this.elm = ('undefined' != typeof INSTALL) ? INSTALL.createElement(this.options.location, this.elm) : document.body;
+            console.log(typeof INSTALL);
             this.renderInElm();
             if(this.options["location type"] == 'floated'){
                 this.renderFloated();
@@ -36,9 +38,37 @@ if('undefined' == typeof INSTALL_SCOPE.BlockLy){
             
             this.searchInput = document.getElementsByClassName('blockly-g-search-input')[0];
             this.searchSubmit = document.getElementsByClassName('blockly-g-search-submit')[0];
-            document.getElementsByTagName('blockly-g-search-trigger')[0].innerHTML = this.currentSVG;
+            this.trigger = document.getElementsByTagName('blockly-g-search-trigger')[0];
+            //console.log(this, 'fffffff');
+            this.trigger.innerHTML = this.currentSVG;
             this.searchInput.setAttribute('placeholder',this.options.placeholder);
             this.searchSubmit.textContent  = this.options.submit_text;
+            this.bindEvents();
+        }
+        bindEvents(){
+            var myThis = this;
+            this.searchInput.onblur = function(){
+                myThis.blur();
+            }
+            this.searchInput.onkeypress = function(e){
+                e = e ? e : window.event;
+                myThis.keyPress(e);
+            }
+
+            this.searchSubmit.onclick = function(){
+                myThis.search();
+            }
+
+            this.searchSubmit.onfocus = function(){
+                myThis.focusOnSubmit();
+            }
+            this.searchSubmit.onblur = function(){
+                myThis.blur();
+            }
+
+            this.trigger.onclick = function(){
+                myThis.searchTrigger();
+            }
         }
         renderInElm(){
             var elm = INSTALL_SCOPE.BlockLy.gSearch.elm ? INSTALL_SCOPE.BlockLy.gSearch.elm : document.body;
@@ -127,7 +157,8 @@ INSTALL_SCOPE.BlockLy.gSearch.elm = null;
 
 if(window.INSTALL_OPTIONS) {
     INSTALL_SCOPE.BlockLy.gSearch.location = INSTALL.proxy.originalURL.parsed;
-    console.log(INSTALL_SCOPE.BlockLy.gSearch.location);
+    console.log('dddddd');
+    console.log(INSTALL);
     INSTALL_SCOPE.BlockLy.gSearch.reload(INSTALL_OPTIONS);
 }
 else {
