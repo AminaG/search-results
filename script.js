@@ -4,8 +4,6 @@ if(!window.INSTALL_SCOPE){
 if('undefined' == typeof INSTALL_SCOPE.BlockLy){
     INSTALL_SCOPE.BlockLy = {};
 }
-console.log('sssss');
-console.log(window.INSTALL);
 (function(){
     class gSearch{
         getHost(){
@@ -29,8 +27,8 @@ console.log(window.INSTALL);
                                         </blockly-g-search-trigger>
                                     </blockly-g-search-inner>`;
             this.addClass(this.searchOuter,'theme-' + this.options.theme);    
-            this.elm = ('undefined' != typeof INSTALL) ? INSTALL.createElement(this.options.location, this.elm) : document.body;
-            console.log(typeof INSTALL);
+            this.elm = ('undefined' != typeof INSTALL.createElement) ? INSTALL.createElement(this.options.location, this.elm) : document.body;
+            console.log(typeof INSTALL.createElement);
             this.renderInElm();
             if(this.options["location type"] == 'floated'){
                 this.renderFloated();
@@ -157,8 +155,8 @@ INSTALL_SCOPE.BlockLy.gSearch.elm = null;
 
 if(window.INSTALL_OPTIONS) {
     INSTALL_SCOPE.BlockLy.gSearch.location = INSTALL.proxy.originalURL.parsed;
-    console.log('dddddd');
-    console.log(INSTALL);
+    // console.log('dddddd');
+    // console.log(INSTALL);
     INSTALL_SCOPE.BlockLy.gSearch.reload(INSTALL_OPTIONS);
 }
 else {
