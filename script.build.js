@@ -45,7 +45,6 @@ if ('undefined' == typeof INSTALL_SCOPE.Blockly) {
                 //console.log(this, 'fffffff');
                 //this.trigger.innerHTML = this.currentSVG;
                 this.searchInput.setAttribute('placeholder', this.options.placeholder);
-                this.searchSubmit.textContent = this.options.submit_text;
                 this.resizeSubmit();
                 this.bindEvents();
             }
@@ -119,9 +118,14 @@ if ('undefined' == typeof INSTALL_SCOPE.Blockly) {
             key: 'renderFloated',
             value: function renderFloated() {
                 this.addClass(this.searchOuter, 'blockly-g-floated');
+                console.log('this.options.position_horizontal.type', this.options.position_horizontal.type);
+                if ('right' == this.options.position_horizontal.type) {
+                    this.addClass(this.searchOuter, 'blockly-g-floated-at-left');
+                }
+                this.addClass(this.searchOuter, 'blockly-g-floated');
                 var cssObj = {};
-                cssObj[this.options.postion_horizontal.type] = this.options.postion_horizontal.distance;
-                cssObj[this.options.postion_vertical.type] = this.options.postion_vertical.distance;
+                cssObj[this.options.position_horizontal.type] = this.options.position_horizontal.distance;
+                cssObj[this.options.position_vertical.type] = this.options.position_vertical.distance;
 
                 //console.log(this.options);
                 //console.log(cssObj);
