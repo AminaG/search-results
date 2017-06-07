@@ -132,13 +132,7 @@
                     "order": 5,
                     "type": "string",
                     "default": "Enter search term ..."
-                },
-            "submit_text": {
-                    "title": "Input button text",
-                    "order": 6,
-                    "type": "string",
-                    "default": "Search"
-                },
+                },            
             "theme" : {
                     "title": "Choose theme",
                     "order": 7,

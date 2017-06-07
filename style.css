@@ -14,7 +14,7 @@ body.blockly-g-search-body-devel-theme-light{
 }
 blockly-g-search{
     width: 100%;
-    max-width: 350px;
+    max-width: 350px;    
 }
 blockly-g-search,
 blockly-g-search-inner,
@@ -33,6 +33,7 @@ blockly-g-search-inner{
 blockly-g-search-inner blockly-g-search-visible-on-open,
 blockly-g-search-inner .blockly-g-search-submit{
     direction: ltr;
+    cursor:pointer;
     text-align: left;
 }
 .blockly-gsearch-opened blockly-g-search-visible-on-open button{
