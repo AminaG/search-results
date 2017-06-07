@@ -1,23 +1,17 @@
-if(!window.INSTALL_SCOPE){
-    window.INSTALL_SCOPE = {
-        devel : true
-    };
-}
-if('undefined' == typeof INSTALL_SCOPE.BlockLy){
-    INSTALL_SCOPE.BlockLy = {};
+
+if('undefined' == typeof INSTALL_SCOPE.Blockly){
+    INSTALL_SCOPE.Blockly = {};
 }
 (function(){
     class gSearch{
         getHost(){
-            return INSTALL_SCOPE.BlockLy.gSearch.location.host;
+            return INSTALL_SCOPE.Blockly.gSearch.location.host;
         }
         
         reload(options){
             this.options = options;
 //            this.currentSVG = this.SVG.replace(/color/,this.options.icon_color); 
-            if(INSTALL_SCOPE.devel){
-                this.addClass(document.body, 'blockly-g-search-body-devel-theme-' + this.options.theme);
-            }
+            
             this.reRender();
         }
         reRender(){
@@ -100,7 +94,7 @@ if('undefined' == typeof INSTALL_SCOPE.BlockLy){
             // }
         }
         renderInElm(){
-            var elm = INSTALL_SCOPE.BlockLy.gSearch.elm ? INSTALL_SCOPE.BlockLy.gSearch.elm : document.body;
+            var elm = INSTALL_SCOPE.Blockly.gSearch.elm ? INSTALL_SCOPE.Blockly.gSearch.elm : document.body;
             elm.appendChild(this.searchOuter);
             //searchOuter.id='searchOuter'
             
@@ -213,38 +207,18 @@ if('undefined' == typeof INSTALL_SCOPE.BlockLy){
             return this.searchInput.value;
         }    
     };
-/*BlockLyGSearch.options = null;
-BlockLyGSearch.location : null;
+/*BlocklyGSearch.options = null;
+BlocklyGSearch.location : null;
 */
-INSTALL_SCOPE.BlockLy.gSearch = new gSearch()
-//INSTALL_SCOPE.BlockLy.gSearch.SVG = '<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"      width="30" height="30" viewBox="0 0 485.213 485.213" fill="color" style="enable-background:new 0 0 485.213 485.213;"    xml:space="preserve"> <g>  <g>         <path d="M363.909,181.955C363.909,81.473,282.44,0,181.956,0C81.474,0,0.001,81.473,0.001,181.955s81.473,181.951,181.955,181.951          C282.44,363.906,363.909,282.437,363.909,181.955z M181.956,318.416c-75.252,0-136.465-61.208-136.465-136.46           c0-75.252,61.213-136.465,136.465-136.465c75.25,0,136.468,61.213,136.468,136.465             C318.424,257.208,257.206,318.416,181.956,318.416z"/>        <path d="M471.882,407.567L360.567,296.243c-16.586,25.795-38.536,47.734-64.331,64.321l111.324,111.324            c17.772,17.768,46.587,17.768,64.321,0C489.654,454.149,489.654,425.334,471.882,407.567z"/>   </g> </g> </svg>';
-INSTALL_SCOPE.BlockLy.gSearch.elm = null;
+INSTALL_SCOPE.Blockly.gSearch = new gSearch()
+//INSTALL_SCOPE.Blockly.gSearch.SVG = '<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"      width="30" height="30" viewBox="0 0 485.213 485.213" fill="color" style="enable-background:new 0 0 485.213 485.213;"    xml:space="preserve"> <g>  <g>         <path d="M363.909,181.955C363.909,81.473,282.44,0,181.956,0C81.474,0,0.001,81.473,0.001,181.955s81.473,181.951,181.955,181.951          C282.44,363.906,363.909,282.437,363.909,181.955z M181.956,318.416c-75.252,0-136.465-61.208-136.465-136.46           c0-75.252,61.213-136.465,136.465-136.465c75.25,0,136.468,61.213,136.468,136.465             C318.424,257.208,257.206,318.416,181.956,318.416z"/>        <path d="M471.882,407.567L360.567,296.243c-16.586,25.795-38.536,47.734-64.331,64.321l111.324,111.324            c17.772,17.768,46.587,17.768,64.321,0C489.654,454.149,489.654,425.334,471.882,407.567z"/>   </g> </g> </svg>';
+INSTALL_SCOPE.Blockly.gSearch.elm = null;
 
-if(window.INSTALL_OPTIONS) {
-    INSTALL_SCOPE.BlockLy.gSearch.location = INSTALL.proxy.originalURL.parsed;
-    // console.log('dddddd');
-    // console.log(INSTALL);
-    INSTALL_SCOPE.BlockLy.gSearch.reload(INSTALL_OPTIONS);
-}
-else {
-    INSTALL_SCOPE.BlockLy.gSearch.location = window.location;
-    INSTALL_SCOPE.BlockLy.gSearch.reload({
-        color:'blue',
-        'location type':'floated',
-        'postion_horizontal' :{
-            'type':'left',
-            distance:'10px'
-        },
-        'postion_vertical' :{
-            'type':'top',
-            distance:'10px'
-        },
-        submit_text:'now',
-        theme:'light',
-        placeholder:'Enter search term ...'
-    });
-}
-//INSTALL_SCOPE.BlockLy.gSearch.addSearchToPage();
+INSTALL_SCOPE.Blockly.gSearch.location = INSTALL.proxy.originalURL.parsed;
+// console.log('dddddd');
+// console.log(INSTALL);
+INSTALL_SCOPE.Blockly.gSearch.reload(INSTALL_OPTIONS);
+//INSTALL_SCOPE.Blockly.gSearch.addSearchToPage();
 //console.log('ssss');
 })();
 

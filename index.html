@@ -7,6 +7,33 @@
         abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>
         abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>abc<br>
         <br><br><br><br>
-        <script src=script.js></script>        
+        <script>
+        //make environemt-like varables
+        INSTALL = { proxy : {originalURL : {parsed : location} } };
+        INSTALL_SCOPE = {
+            devel : true
+        };
+        INSTALL_OPTIONS = {
+            color:'blue',
+            'location type':'floated',
+            'postion_horizontal' :{
+                'type':'left',
+                distance:'10px'
+            },
+            'postion_vertical' :{
+                'type':'top',
+                distance:'10px'
+            },
+            submit_text:'now',
+            theme:'light',
+            placeholder:'Enter search term ...'
+        };
+        </script>    
+        <script src=script.js></script>   
+        <script>
+        if(INSTALL_SCOPE.devel){
+                INSTALL_SCOPE.Blockly.gSearch.addClass(document.body, 'Blockly-g-search-body-devel-theme-' + INSTALL_SCOPE.Blockly.gSearch.options.theme);
+            }
+        </script>     
     </body>
 </html>
