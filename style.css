@@ -1,3 +1,6 @@
+body.blockly-g-search-body-devel-theme-light{
+    background-color: #000;
+}
 .blockly-gsearch-opened blockly-g-search,
 .blockly-gsearch-opened blockly-g-search-visible-on-open,
 .blockly-gsearch-opened blockly-g-search-visible-on-open input{
@@ -21,7 +24,16 @@ blockly-g-search-visible-on-open{
 .blockly-gsearch-opened blockly-g-search-visible-on-open input{
     border: 1px solid #e8e8e8;
     font-size: 15px;
-    width: 70%;
+    width: 100%;
+}
+blockly-g-search-inner{
+    direction: rtl;
+    text-align: left;
+}
+blockly-g-search-inner blockly-g-search-visible-on-open,
+blockly-g-search-inner .blockly-g-search-submit{
+    direction: ltr;
+    text-align: left;
 }
 .blockly-gsearch-opened blockly-g-search-visible-on-open button{
     /*border: 1px solid #e8e8e8;*/
@@ -31,8 +43,8 @@ blockly-g-search-visible-on-open {
     display:none;
 }
 .blockly-gsearch-opened blockly-g-search-visible-on-open{
-	display: block;
-
+	display: inline-block;
+    width: 70%;
 }
 
 blockly-g-search-input {
@@ -45,8 +57,44 @@ blockly-g-search.blockly-g-floated{
     position: fixed;
     z-index: 99;
 }
+blockly-g-search .blockly-g-search-submit{
+    border: 0;
+    height: 50px;
+    width: 20%;
+    display: inline-block;
+    background-size: contain;
+    background-color: transparent;
+    text-indent: 99;
+    overflow: hidden;
+    background-position: 3px 3px;
+    background-repeat: no-repeat;
+}
 
-blockly-g-search-trigger {
+.blockly-gsearch-opened.blockly-g-search-theme-dark{
+    background-color:#838383;
+}
+
+.blockly-g-search-theme-dark .blockly-g-search-submit{
+    background-image: url('./icons/search_dark.png');
+    
+}
+.blockly-g-search-theme-dark .blockly-g-search-input{
+    background-color:#717171;
+    color:#fff;
+    border-color: #fff;
+}
+.blockly-gsearch-opened.blockly-g-search-theme-light{
+    background-color:#FFF;
+}
+.blockly-g-search-theme-light .blockly-g-search-submit{
+    background-image: url('./icons/search_light.png');
+    background-color: transparent;
+}
+.blockly-g-search-theme-light .blockly-g-search-input{
+    color: gray;
+    border-color:#dddddd;
+}
+/*blockly-g-search-trigger {
     cursor:pointer
 }
 blockly-g-search-trigger svg{
@@ -54,4 +102,13 @@ blockly-g-search-trigger svg{
 }
 .blockly-gsearch-opened blockly-g-search-trigger {
     display: none;
-}
+
+
+
+
+
+
+
+
+
+}*/

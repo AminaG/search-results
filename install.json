@@ -152,13 +152,6 @@
                         "light": "Light",
                         "dark": "Dark"
                     }
-                },
-                "icon_color": {
-                    "title": "color of icon",
-                    "order": 7,
-                    "type": "string",
-                    "default": "blue",
-                    "format": "color"
                 }
         }
     }
