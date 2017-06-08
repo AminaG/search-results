@@ -14,11 +14,11 @@ body.blockly-g-search-body-devel-theme-light{
 }
 blockly-g-search{
     width: 100%;
-    max-width: 150px;
-    -webkit-transition: width 1s ease-in-out;
-    -moz-transition: width 1s ease-in-out;
-    -o-transition: width 1s ease-in-out;
-    transition: width 1s ease-in-out;
+    max-width: 70px;
+    -webkit-transition: 1s ease-in-out;
+    -moz-transition: 1s ease-in-out;
+    -o-transition: 1s ease-in-out;
+    transition: 1s ease-in-out;
 }
 blockly-g-search,
 blockly-g-search-inner,
@@ -80,7 +80,7 @@ blockly-g-search .blockly-g-search-submit{
     display: inline-block;
     background-size: contain;
     background-color: transparent;
-    text-indent: 99;
+    text-indent: 999;
     overflow: hidden;
     background-position: 3px 3px;
     background-repeat: no-repeat;

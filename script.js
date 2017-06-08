@@ -16,13 +16,14 @@ if('undefined' == typeof INSTALL_SCOPE.Blockly){
         }
         reRender(){
             this.searchOuter = document.createElement('blockly-g-search');
-            this.searchOuter.innerHTML = `<blockly-g-search-inner>
-                                        
-                                        <blockly-g-search-visible-on-open>
-                                            <input class="blockly-g-search-input" type='search'>
-                                        </blockly-g-search-visible-on-open>
-                                        <button type="button" class="blockly-g-search-submit" >Search</button>
-                                    </blockly-g-search-inner>`;
+            this.searchOuter.innerHTML = `<blockly-g-search-outer>
+                                            <blockly-g-search-inner>
+                                                <blockly-g-search-visible-on-open>
+                                                    <input class="blockly-g-search-input" type='search'>
+                                                </blockly-g-search-visible-on-open>
+                                                <button type="button" class="blockly-g-search-submit" >Search</button>
+                                            </blockly-g-search-inner>
+                                            </blockly-g-search-outer>`;
             this.addClass(this.searchOuter,'blockly-g-search-theme-' + this.options.theme);    
             this.elm = !INSTALL_SCOPE.devel ? INSTALL.createElement(this.options.location, this.elm) : document.body;
             //console.log(typeof INSTALL.createElement);
