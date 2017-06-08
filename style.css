@@ -19,14 +19,19 @@ blockly-g-search{
     -moz-transition: 1s ease-in-out;
     -o-transition: 1s ease-in-out;
     transition: 1s ease-in-out;
+    overflow: hidden;
 }
 blockly-g-search,
+blockly-g-search-outer,
 blockly-g-search-inner,
 blockly-g-search-visible-on-open{
     display: block;
 }
 blockly-g-search.blockly-gsearch-opened{
     max-width: 350px;
+}
+blockly-g-search-outer{
+    width: 350px;
 }
 .blockly-gsearch-opened blockly-g-search-visible-on-open input{
     border: 1px solid #e8e8e8;
@@ -41,6 +46,9 @@ blockly-g-search-inner blockly-g-search-visible-on-open,
 blockly-g-search-inner .blockly-g-search-submit{
     direction: ltr;
     text-align: left;
+}
+.blockly-g-floated-at-left{
+    direction: rtl;
 }
 .blockly-g-floated-at-left blockly-g-search-inner{
     direction: ltr;
@@ -72,11 +80,12 @@ blockly-g-search-input {
 blockly-g-search.blockly-g-floated{
     position: fixed;
     z-index: 99;
+
 }
 blockly-g-search .blockly-g-search-submit{
     border: 0;
     height: 50px;
-    width: 100%;
+    width: 20%;
     display: inline-block;
     background-size: contain;
     background-color: transparent;
