@@ -15,10 +15,10 @@ body.blockly-g-search-body-devel-theme-light{
 blockly-g-search{
     width: 100%;
     max-width: 70px;
-    -webkit-transition: 1s ease-in-out;
+    /*-webkit-transition: 1s ease-in-out;
     -moz-transition: 1s ease-in-out;
     -o-transition: 1s ease-in-out;
-    transition: 1s ease-in-out;
+    transition: 1s ease-in-out;*/
     overflow: hidden;
 }
 blockly-g-search,
@@ -46,6 +46,7 @@ blockly-g-search-inner blockly-g-search-visible-on-open,
 blockly-g-search-inner .blockly-g-search-submit{
     direction: ltr;
     text-align: left;
+    vertical-align: middle;
 }
 .blockly-g-floated-at-left{
     direction: rtl;
@@ -89,10 +90,13 @@ blockly-g-search .blockly-g-search-submit{
     display: inline-block;
     background-size: contain;
     background-color: transparent;
-    text-indent: 999;
+    text-indent: 999px;
     overflow: hidden;
     background-position: 3px 3px;
     background-repeat: no-repeat;
+    width: 20%;
+    min-width: 70px;
+    background-position: center;
 }
 blockly-g-search.blockly-gsearch-opened .blockly-g-search-submit{
     width: 20%;
@@ -102,7 +106,7 @@ blockly-g-search.blockly-gsearch-opened .blockly-g-search-submit{
 }
 
 .blockly-g-search-theme-dark .blockly-g-search-submit{
-    background-image: url('./icons/search_dark.png');
+    background-image: url('https://storage.googleapis.com/ez-public/search_dark.png');
     
 }
 .blockly-g-search-theme-dark .blockly-g-search-input{
@@ -114,7 +118,7 @@ blockly-g-search.blockly-gsearch-opened .blockly-g-search-submit{
     background-color:#FFF;
 }
 .blockly-g-search-theme-light .blockly-g-search-submit{
-    background-image: url('./icons/search_light.png');
+    background-image: url('https://storage.googleapis.com/ez-public/search_light.png');
     background-color: transparent;
 }
 .blockly-g-search-theme-light .blockly-g-search-input{

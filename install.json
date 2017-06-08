@@ -15,7 +15,7 @@
       "handlers": [
         {
           "options": ["*"],
-          "execute": "INSTALL_SCOPE.BlockLy.gSearch.reload(INSTALL_OPTIONS)"
+          "execute": "INSTALL_SCOPE.Blockly.gSearch.reload(INSTALL_OPTIONS)"
         }
       ]
     },

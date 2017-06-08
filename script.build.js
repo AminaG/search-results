@@ -30,7 +30,7 @@ if ('undefined' == typeof INSTALL_SCOPE.Blockly) {
             key: 'reRender',
             value: function reRender() {
                 this.searchOuter = document.createElement('blockly-g-search');
-                this.searchOuter.innerHTML = '<blockly-g-search-inner>\n                                        \n                                        <blockly-g-search-visible-on-open>\n                                            <input class="blockly-g-search-input" type=\'search\'>\n                                        </blockly-g-search-visible-on-open>\n                                        <button type="button" class="blockly-g-search-submit" >Search</button>\n                                    </blockly-g-search-inner>';
+                this.searchOuter.innerHTML = '<blockly-g-search-outer>\n                                            <blockly-g-search-inner>\n                                                <blockly-g-search-visible-on-open>\n                                                    <input class="blockly-g-search-input" type=\'search\'>\n                                                </blockly-g-search-visible-on-open>\n                                                <button type="button" class="blockly-g-search-submit" >Search</button>\n                                            </blockly-g-search-inner>\n                                            </blockly-g-search-outer>';
                 this.addClass(this.searchOuter, 'blockly-g-search-theme-' + this.options.theme);
                 this.elm = !INSTALL_SCOPE.devel ? INSTALL.createElement(this.options.location, this.elm) : document.body;
                 //console.log(typeof INSTALL.createElement);
