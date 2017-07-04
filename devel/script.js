@@ -21,8 +21,10 @@ if('undefined' == typeof INSTALL_SCOPE.Blockly){
                                                 <blockly-g-search-visible-on-open>
                                                     <input class="blockly-g-search-input" type='search'>
                                                 </blockly-g-search-visible-on-open>
-                                                <button type="button" class="blockly-g-search-submit" >Search</button>
-                                            </blockly-g-search-inner>
+                                                <blockly-g-search-bg>
+                                                    <button type="button" class="blockly-g-search-submit" >Search</button>
+                                                </blockly-g-search-bg>
+                                                </blockly-g-search-inner>
                                             </blockly-g-search-outer>`;
             this.addClass(this.searchOuter,'blockly-g-search-theme-' + this.options.theme);    
             this.elm = !INSTALL_SCOPE.devel ? INSTALL.createElement(this.options.location, this.elm) : document.body;
@@ -40,6 +42,9 @@ if('undefined' == typeof INSTALL_SCOPE.Blockly){
             this.searchInput.setAttribute('placeholder',this.options.placeholder);
             this.resizeSubmit();
             this.bindEvents();
+            if(INSTALL_ID == 'preview'){
+                this.openSearch();
+            }
         }
         bindEvent(el,evtType,fn){
             if(el.addEventListener){
@@ -107,8 +112,8 @@ if('undefined' == typeof INSTALL_SCOPE.Blockly){
             }
             this.addClass(this.searchOuter, 'blockly-g-floated');
             var cssObj = {};
-            cssObj[this.options.position_horizontal.type] = this.options.position_horizontal.distance;
-            cssObj[this.options.position_vertical.type] = this.options.position_vertical.distance;
+            cssObj[this.options.position_horizontal.type] = this.options.position_horizontal.distance + 'px';
+            cssObj[this.options.position_vertical.type] = this.options.position_vertical.distance + 'px';
             
             //console.log(this.options);
             //console.log(cssObj);
@@ -179,19 +184,19 @@ if('undefined' == typeof INSTALL_SCOPE.Blockly){
         }
         toggleSearch(){
             //console.log('openSearch',  new Date().getMilliseconds() /1000);
-                
             if(!this.hadClass(this.searchOuter, 'blockly-gsearch-opened')){
                 this.openSearch();
             }
+            
             else{
                 this.closeSearch();
             }
         }
         openSearch(){
             this.addClass(this.searchOuter, 'blockly-gsearch-opened');
-            // document.getElementById('search_open').style.display='block'
-            // document.getElementById('search_trigger').style.display='none'
-            this.searchInput.focus()
+            if (INSTALL_ID !== 'preview') {
+               this.searchInput.focus();
+            }
         }
         closeSearch(){
             this.removeClass(this.searchOuter, 'blockly-gsearch-opened');
@@ -202,7 +207,14 @@ if('undefined' == typeof INSTALL_SCOPE.Blockly){
             }
         }
         search(){
-            window.open(this.getSearchUrl(),'_blank')
+            var openFunction;
+            if (INSTALL_ID === 'preview') {
+                openFunction = CloudflareApps.preview.open.direct
+            }
+            else{
+                openFunction = window.open; 
+            }
+            openFunction(this.getSearchUrl(),'_blank')
         }
         getSearchUrl(){
             var searchTerm = this.getSearchTerm();

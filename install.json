@@ -3,11 +3,11 @@
         "body": [
             {
                 "type": "style",
-                "src": "./style.css"
+                "src": "./prod/style.css"
             },
             {
                 "type": "script",
-                "src": "./script.build.js"
+                "src": "./prod/script.js"
             }
         ]
     },
@@ -24,7 +24,7 @@
             "location type" : {
               "default": "element",
               "format": "radios",
-              "title": "How to position form",
+              "title": "Position",
               "type": "string",
               "order": 1,
               "enum": [
@@ -32,8 +32,8 @@
                 "floated"
               ],
               "enumNames": {
-                "element": "In element",
-                "floated": "Fixed in screen"
+                "element": "In a specific location",
+                "floated": "Always visible"
               }
             },
             "location": {
@@ -50,6 +50,7 @@
                 "order": 2
             },
             "position_vertical" : {
+              "title" : "verticaly position",          
               "type": "object",
               "order": 3,
               "showIf": {
@@ -73,22 +74,18 @@
                 "distance" : {
                     "title": "Vertical distance",
                     "order": 2,
-                    "type": "string",
-                    "default": "10px",
-                    "enum": [
-                        "5px",
-                        "10px",
-                        "15px"
-                    ],
-                    "enumNames": {
-                        "5px": "Small",
-                        "10px": "Medium",
-                        "15px": "Large"
-                    }
+                    "type": "number",
+                    "format": "slider",
+                    "default": 5,
+                    "minimum": 5,
+                    "maximum": 30,
+                    "step": 2
+                    
                 }
               }
             },
             "position_horizontal" : {
+              "title" : "horizontaly position",
               "type": "object",
               "order": 4,
               "showIf": {
@@ -112,23 +109,17 @@
                 "distance" : {
                     "title": "Horizontal distance",
                     "order": 2,
-                    "type": "string",
-                    "default": "10px",
-                    "enum": [
-                        "5px",
-                        "10px",
-                        "15px"
-                    ],
-                    "enumNames": {
-                        "5px": "Small",
-                        "10px": "Medium",
-                        "15px": "Large"
-                    }
+                    "type": "number",
+                    "format": "slider",
+                    "default": 5,
+                    "minimum": 5,
+                    "maximum": 30,
+                    "step": 2
                 }
               }
             },
             "placeholder": {
-                    "title": "Input button text",
+                    "title": "Input placeholder",
                     "order": 5,
                     "type": "string",
                     "default": "Enter search term ..."

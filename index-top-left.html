@@ -1,6 +1,6 @@
 <html>
     <head>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="prod/style.css">
     </head>
     <body style="background-color: #000;">
         <br><br><br><br><br><br>
@@ -13,6 +13,7 @@
         INSTALL_SCOPE = {
             devel : true
         };
+        INSTALL_ID = "devel";
         INSTALL_OPTIONS = {
             color:'blue',
             'location type':'floated',
@@ -28,7 +29,7 @@
             placeholder:'Enter search term ...'
         };
         </script>    
-        <script src=script.js></script>   
+        <script src="prod/script.js"></script>   
         <script>
         if(INSTALL_SCOPE.devel){
                 INSTALL_SCOPE.Blockly.gSearch.addClass(document.body, 'Blockly-g-search-body-devel-theme-' + INSTALL_SCOPE.Blockly.gSearch.options.theme);

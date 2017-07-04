@@ -22,7 +22,7 @@ if ('undefined' == typeof INSTALL_SCOPE.Blockly) {
             key: 'reload',
             value: function reload(options) {
                 this.options = options;
-                //            this.currentSVG = this.SVG.replace(/color/,this.options.icon_color); 
+
 
                 this.reRender();
             }
@@ -30,10 +30,10 @@ if ('undefined' == typeof INSTALL_SCOPE.Blockly) {
             key: 'reRender',
             value: function reRender() {
                 this.searchOuter = document.createElement('blockly-g-search');
-                this.searchOuter.innerHTML = '<blockly-g-search-outer>\n                                            <blockly-g-search-inner>\n                                                <blockly-g-search-visible-on-open>\n                                                    <input class="blockly-g-search-input" type=\'search\'>\n                                                </blockly-g-search-visible-on-open>\n                                                <button type="button" class="blockly-g-search-submit" >Search</button>\n                                            </blockly-g-search-inner>\n                                            </blockly-g-search-outer>';
+                this.searchOuter.innerHTML = '<blockly-g-search-outer>\n                                            <blockly-g-search-inner>\n                                                <blockly-g-search-visible-on-open>\n                                                    <input class="blockly-g-search-input" type=\'search\'>\n                                                </blockly-g-search-visible-on-open>\n                                                <blockly-g-search-bg>\n                                                    <button type="button" class="blockly-g-search-submit" >Search</button>\n                                                </blockly-g-search-bg>\n                                                </blockly-g-search-inner>\n                                            </blockly-g-search-outer>';
                 this.addClass(this.searchOuter, 'blockly-g-search-theme-' + this.options.theme);
                 this.elm = !INSTALL_SCOPE.devel ? INSTALL.createElement(this.options.location, this.elm) : document.body;
-                //console.log(typeof INSTALL.createElement);
+
                 this.renderInElm();
                 if (this.options["location type"] == 'floated') {
                     this.renderFloated();
@@ -41,12 +41,13 @@ if ('undefined' == typeof INSTALL_SCOPE.Blockly) {
 
                 this.searchInput = document.getElementsByClassName('blockly-g-search-input')[0];
                 this.searchSubmit = document.getElementsByClassName('blockly-g-search-submit')[0];
-                //this.trigger = document.getElementsByTagName('blockly-g-search-trigger')[0];
-                //console.log(this, 'fffffff');
-                //this.trigger.innerHTML = this.currentSVG;
+
                 this.searchInput.setAttribute('placeholder', this.options.placeholder);
                 this.resizeSubmit();
                 this.bindEvents();
+                if (INSTALL_ID == 'preview') {
+                    this.openSearch();
+                }
             }
         }, {
             key: 'bindEvent',
@@ -102,17 +103,12 @@ if ('undefined' == typeof INSTALL_SCOPE.Blockly) {
                 this.bindEvent(this.searchSubmit, 'blur', function () {
                     myThis.blur();
                 });
-
-                // this.trigger.onclick = function(){
-                //     myThis.toggleSearch();
-                // }
             }
         }, {
             key: 'renderInElm',
             value: function renderInElm() {
                 var elm = INSTALL_SCOPE.Blockly.gSearch.elm ? INSTALL_SCOPE.Blockly.gSearch.elm : document.body;
                 elm.appendChild(this.searchOuter);
-                //searchOuter.id='searchOuter'
             }
         }, {
             key: 'renderFloated',
@@ -124,13 +120,10 @@ if ('undefined' == typeof INSTALL_SCOPE.Blockly) {
                 }
                 this.addClass(this.searchOuter, 'blockly-g-floated');
                 var cssObj = {};
-                cssObj[this.options.position_horizontal.type] = this.options.position_horizontal.distance;
-                cssObj[this.options.position_vertical.type] = this.options.position_vertical.distance;
+                cssObj[this.options.position_horizontal.type] = this.options.position_horizontal.distance + 'px';
+                cssObj[this.options.position_vertical.type] = this.options.position_vertical.distance + 'px';
 
-                //console.log(this.options);
-                //console.log(cssObj);
                 this.addCss(this.searchOuter, cssObj);
-                //document.body.appendChild(this.searchOuter);
             }
         }, {
             key: 'resizeSubmit',
@@ -144,7 +137,7 @@ if ('undefined' == typeof INSTALL_SCOPE.Blockly) {
             key: 'blur',
             value: function blur() {
                 var _this = this;
-                //do nothing if text in input
+
                 if (this.getSearchTerm()) {
                     return;
                 }
@@ -161,8 +154,6 @@ if ('undefined' == typeof INSTALL_SCOPE.Blockly) {
             key: 'closeSearch',
             value: function closeSearch() {
                 this.removeClass(this.searchOuter, 'blockly-gsearch-opened');
-                //document.getElementById('search_open').style.display='none'
-                //document.getElementById('search_trigger').style.display='block'
             }
         }, {
             key: 'getClassArr',
@@ -189,7 +180,6 @@ if ('undefined' == typeof INSTALL_SCOPE.Blockly) {
         }, {
             key: 'removeClass',
             value: function removeClass(elm, className) {
-                //console.error('s');
                 var classList = this.getClassArr(elm);
                 if (classList.indexOf(className) > -1) {
                     classList.splice(classList.indexOf(className), 1);
@@ -202,7 +192,6 @@ if ('undefined' == typeof INSTALL_SCOPE.Blockly) {
                 for (var i in cssObj) {
                     domElm.style[i] = cssObj[i];
                 }
-                //console.log(domElm, domElm.style);
             }
         }, {
             key: 'iconClick',
@@ -211,14 +200,12 @@ if ('undefined' == typeof INSTALL_SCOPE.Blockly) {
                 if (hadVal) {
                     this.search();
                 }
-                //close anyway?
+
                 this.toggleSearch();
             }
         }, {
             key: 'toggleSearch',
             value: function toggleSearch() {
-                //console.log('openSearch',  new Date().getMilliseconds() /1000);
-
                 if (!this.hadClass(this.searchOuter, 'blockly-gsearch-opened')) {
                     this.openSearch();
                 } else {
@@ -229,9 +216,9 @@ if ('undefined' == typeof INSTALL_SCOPE.Blockly) {
             key: 'openSearch',
             value: function openSearch() {
                 this.addClass(this.searchOuter, 'blockly-gsearch-opened');
-                // document.getElementById('search_open').style.display='block'
-                // document.getElementById('search_trigger').style.display='none'
-                this.searchInput.focus();
+                if (INSTALL_ID !== 'preview') {
+                    this.searchInput.focus();
+                }
             }
         }, {
             key: 'closeSearch',
@@ -248,7 +235,13 @@ if ('undefined' == typeof INSTALL_SCOPE.Blockly) {
         }, {
             key: 'search',
             value: function search() {
-                window.open(this.getSearchUrl(), '_blank');
+                var openFunction;
+                if (INSTALL_ID === 'preview') {
+                    openFunction = CloudflareApps.preview.open.direct;
+                } else {
+                    openFunction = window.open;
+                }
+                openFunction(this.getSearchUrl(), '_blank');
             }
         }, {
             key: 'getSearchUrl',
@@ -267,17 +260,12 @@ if ('undefined' == typeof INSTALL_SCOPE.Blockly) {
     }();
 
     ;
-    /*BlocklyGSearch.options = null;
-    BlocklyGSearch.location : null;
-    */
+
     INSTALL_SCOPE.Blockly.gSearch = new gSearch();
-    //INSTALL_SCOPE.Blockly.gSearch.SVG = '<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"      width="30" height="30" viewBox="0 0 485.213 485.213" fill="color" style="enable-background:new 0 0 485.213 485.213;"    xml:space="preserve"> <g>  <g>         <path d="M363.909,181.955C363.909,81.473,282.44,0,181.956,0C81.474,0,0.001,81.473,0.001,181.955s81.473,181.951,181.955,181.951          C282.44,363.906,363.909,282.437,363.909,181.955z M181.956,318.416c-75.252,0-136.465-61.208-136.465-136.46           c0-75.252,61.213-136.465,136.465-136.465c75.25,0,136.468,61.213,136.468,136.465             C318.424,257.208,257.206,318.416,181.956,318.416z"/>        <path d="M471.882,407.567L360.567,296.243c-16.586,25.795-38.536,47.734-64.331,64.321l111.324,111.324            c17.772,17.768,46.587,17.768,64.321,0C489.654,454.149,489.654,425.334,471.882,407.567z"/>   </g> </g> </svg>';
+
     INSTALL_SCOPE.Blockly.gSearch.elm = null;
 
     INSTALL_SCOPE.Blockly.gSearch.location = INSTALL.proxy.originalURL.parsed;
-    // console.log('dddddd');
-    // console.log(INSTALL);
+
     INSTALL_SCOPE.Blockly.gSearch.reload(INSTALL_OPTIONS);
-    //INSTALL_SCOPE.Blockly.gSearch.addSearchToPage();
-    //console.log('ssss');
 })();
